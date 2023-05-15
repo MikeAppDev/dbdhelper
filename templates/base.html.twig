@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
+        <title>{% block title %}DbD Helper{% endblock %}</title>
         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
         {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
         {% block stylesheets %}
@@ -14,6 +14,48 @@
         {% endblock %}
     </head>
     <body>
+        <header>
+            <nav class="">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="{{ path('app_home') }}">DbDHelper</a>
+                    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                        <ul class="navbar-nav">
+                            <li class="nav-item">
+                                {# <a class="nav-link" aria-current="page" href="{{ path('homepage') }}">Accueil</a> #}
+                            </li>
+                            <li class="nav-item">
+                                {# <a class="nav-link" href="{{ path('announces') }}">Voir les annonces</a> #}
+                            </li>
+                            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                            
+                            <li class="nav-item">
+                                    {# <a class="nav-link" href="{{ path('announces/create') }}">Déposer une annonce</a> #}
+                            </li>
+                            <li class="nav-item">
+                                    {# <a class="nav-link" href="{{ path('profile') }}">Profile</a> #}
+                            </li>
+                            <li class="nav-item">
+                                    {# <a class="nav-link" href="{{ path('logout') }}">Se Deconnecter</a> #}
+                            </li>
+                            {% else %}
+                            <li class="nav-item">
+                                    {# <a class="nav-link" href="{{ path('app_register') }}">Inscription</a> #}
+                            </li>
+                            <li class="nav-item">
+                                    <a class="nav-link" href="{{ path('app_login') }}">Se Connecter</a>
+                            </li>
+                            {% endif %}
+
+                            {% if is_granted('ROLE_ADMIN') %}
+                            <li class="nav-item">
+                                    {# <a class="nav-link" href="{{ path('admin') }}">Panel Admin</a> #}
+                            </li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </header>
         {% block body %}{% endblock %}
     </body>
 </html>
